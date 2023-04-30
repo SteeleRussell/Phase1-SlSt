@@ -74,6 +74,19 @@ app.get('/rest/ticket/:id', function(req, res) {
 
 // A POST request
 
+app.delete('/rest/ticket/:id', function(req, res){
+    var removeIndex = tickets.map(function(tickets){
+       return tickets.id;
+    }).indexOf(req.params.id); 
+    
+    if(removeIndex === -1){
+       res.json({message: "Not found"});
+    } else {
+       movies.splice(removeIndex, 1);
+       res.send({message: "ticket " + req.params.id + " removed."});
+    }
+ });
+
 app.post('/rest/ticket/', function(req, res) {
     const newTicket = req.body;
 
